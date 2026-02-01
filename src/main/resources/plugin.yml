@@ -1,0 +1,13 @@
+name: PvpPveLevelingSystem
+version: '1.0'
+main: org.toni_4819.pvpPveLevelingSystem.PvpPveLevelingSystem
+api-version: '1.21'
+depend: [PlaceholderAPI]
+soft-depend: [LuckPerms]
+commands:
+  leveling:
+    description: Manage XP/Levels for PvpPveLevelingSystem
+    usage: /<command> <subcommand>
+    aliases: [pvppvelevelingsystem]
+    permission: pvppvelevelingsystem.admin
+
