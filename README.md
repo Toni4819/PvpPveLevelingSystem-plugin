@@ -1,1 +1,113 @@
-Soon
+# PVP-PVE Leveling System
+
+A Minecraft plugin that adds a **PvP/PvE leveling system** with XP, levels, rewards, and group-based multipliers.  
+Supports both **SQLite** and **MySQL** storage backends, integrates with **LuckPerms** for group multipliers, and **PlaceholderAPI** for custom placeholders.
+
+---
+
+## 📦 Dependencies
+
+- **PaperMC** (1.21+ recommended)
+- **LuckPerms** *(optional)*  
+- **PlaceholderAPI** *(required)*  
+- **bstats** *(included)*  
+
+---
+
+## 🎮 Commands
+
+- `/leveling reload`
+- `/leveling <xp|level> <add|remove|set> <amount> <player>`
+
+---
+
+## 📊 Placeholders (PlaceholderAPI)
+
+- `%pvppvelevelingsystem_xp%` -> player's xp amount
+- `%pvppvelevelingsystem_level%` -> player's level
+- `%pvppvelevelingsystem_remaining_xp%` -> player's remaining xp to next level
+- `%pvppvelevelingsystem_bar%` -> player's xp bar
+- `%pvppvelevelingsystem_level_percent%` -> player's accomplishment level in percent
+- `%pvppvelevelingsystem_next_level_xp%` -> player's next level xp requirement
+- `%pvppvelevelingsystem_next_level%` -> player's next level
+
+---
+
+## ⚙️ Configuration
+
+```yaml
+# ==============================
+# PvpPveLevelingSystem Config
+# ==============================
+
+# Available default are en_us, fr_fr.
+# You can create others languages in /lang/<name>.yml.
+lang: en_us
+
+storage:
+  provider: sql # sql, mysql
+
+# Mysql configuration
+mysql:
+  host: "localhost"
+  port: 3306
+  database: "leveling"
+  username: "root"
+  password: "password"
+
+xp-sources:
+  player: 10
+  zombie: 5
+  skeleton: 5
+  creeper: 5
+  spider: 5
+  blaze: 8
+  enderman: 10
+  # All other mobs not listed will give 0 XP by default.
+
+bar:
+  length: 5
+  full: "&6-"
+  empty: "&7-"
+
+group-xp-multipliers:
+  # Multipliers applied based on LuckPerms primary group.
+  # Example: vip group multiplies the XP by 2.5.
+  default: 1.0
+  vip: 2.5
+  vip_plus: 3.0
+
+levels-xp:
+  # If true, required XP per level is calculated using a multiplier.
+  # Formula: requiredXP = baseXP + (level * multiplier * baseXP)
+  use-multiplier: true
+  multiplier: 0.1
+  base-xp: 10
+
+  # If use-multiplier is false, these values are used directly.
+  # You can define XP requirements per level manually here.
+  1: 10
+  2: 20
+  3: 30
+
+# Example use: generic-level-command: title %player% actionbar {"text":"Levelup ! (lvl %level%)"}
+generic-level-command: []
+
+rewards:
+  # Rewards given when reaching specific levels.
+  # Commands are executed by the console.
+  levels:
+    1:
+      commands:
+        - "give %player% diamond 1"
+    5:
+      commands:
+        - "eco give %player% 100"
+    10:
+      commands:
+        - "eco give %player% 100"
+        - "give %player% diamond 1"
+```
+
+
+
