@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 public class XPManager {
     private final PvpPveLevelingSystem plugin;
@@ -150,9 +151,10 @@ public class XPManager {
                 savePlayer(player);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            plugin.getLogger().log(Level.SEVERE, "Failed to load player data for " + player.getName(), e);
         }
     }
+
 
     public void savePlayer(Player player) {
         try (Connection conn = plugin.getStorageManager().getConnection();
@@ -167,7 +169,7 @@ public class XPManager {
             plugin.getLogger().info("Player data saved: " + player.getName() +
                     " (XP=" + getXP(player) + ", Level=" + getLevel(player) + ")");
         } catch (SQLException e) {
-            e.printStackTrace();
+            plugin.getLogger().log(Level.SEVERE, "Failed to save player data for " + player.getName(), e);
         }
     }
 

@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
 
 public class StorageManager {
     private final PvpPveLevelingSystem plugin;
@@ -25,10 +26,10 @@ public class StorageManager {
                     ")");
             plugin.getLogger().info("Connected to storage using provider: " + provider);
         } catch (SQLException e) {
-            plugin.getLogger().severe("Failed to connect to storage: " + e.getMessage());
-            e.printStackTrace();
+            plugin.getLogger().log(Level.SEVERE, "Failed to connect to storage using provider: " + provider, e);
         }
     }
+
 
     public Connection getConnection() throws SQLException {
         String provider = plugin.getConfig().getString("storage.provider", "sql");

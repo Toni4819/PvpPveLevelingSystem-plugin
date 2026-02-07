@@ -4,12 +4,16 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.jspecify.annotations.NonNull;
 import org.toni_4819.pvpPveLevelingSystem.PvpPveLevelingSystem;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-public class CommandManager implements CommandExecutor {
+public class CommandManager implements CommandExecutor, TabCompleter {
 
     private final PvpPveLevelingSystem plugin;
     private final XPManager xpManager;
@@ -20,11 +24,9 @@ public class CommandManager implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NonNull CommandSender sender, @NonNull Command command, @NonNull String label, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage(plugin.getLangManager().getMessage("usage", Map.of(
-                    "%command%", label
-            )));
+            sender.sendMessage(plugin.getLangManager().getMessage("usage", Map.of("%command%", label)));
             return true;
         }
 
@@ -47,11 +49,53 @@ public class CommandManager implements CommandExecutor {
         return true;
     }
 
+    @Override
+    public List<String> onTabComplete(@NonNull CommandSender sender,@NonNull Command command,@NonNull String alias, String[] args) {
+        List<String> suggestions = new ArrayList<>();
+
+        if (args.length == 1) {
+            String partial = args[0].toLowerCase();
+            List<String> subs = List.of("xp", "level", "reload");
+            for (String s : subs) {
+                if (s.startsWith(partial)) suggestions.add(s);
+            }
+            return suggestions;
+        }
+
+        String sub = args[0].toLowerCase();
+        if (sub.equals("xp") || sub.equals("level")) {
+            if (args.length == 2) {
+                String partial = args[1].toLowerCase();
+                List<String> actions = List.of("add", "remove", "set");
+                for (String a : actions) {
+                    if (a.startsWith(partial)) suggestions.add(a);
+                }
+                return suggestions;
+            } else if (args.length == 3) {
+                String partial = args[2].toLowerCase();
+                List<String> amounts = List.of("1", "5", "10", "50", "100");
+                for (String a : amounts) {
+                    if (a.startsWith(partial)) suggestions.add(a);
+                }
+                return suggestions;
+            } else if (args.length == 4) {
+                String partial = args[3].toLowerCase();
+                suggestions.addAll(
+                        Bukkit.getOnlinePlayers().stream()
+                                .map(Player::getName)
+                                .filter(name -> name.toLowerCase().startsWith(partial))
+                                .toList()
+                );
+                return suggestions;
+            }
+        }
+
+        return suggestions;
+    }
+
     private void handleXP(CommandSender sender, String[] args, String label) {
         if (args.length < 4) {
-            sender.sendMessage(plugin.getLangManager().getMessage("xp-usage", Map.of(
-                    "%command%", label
-            )));
+            sender.sendMessage(plugin.getLangManager().getMessage("xp-usage", Map.of("%command%", label)));
             return;
         }
 
@@ -100,9 +144,7 @@ public class CommandManager implements CommandExecutor {
 
     private void handleLevel(CommandSender sender, String[] args, String label) {
         if (args.length < 4) {
-            sender.sendMessage(plugin.getLangManager().getMessage("level-usage", Map.of(
-                    "%command%", label
-            )));
+            sender.sendMessage(plugin.getLangManager().getMessage("level-usage", Map.of("%command%", label)));
             return;
         }
 

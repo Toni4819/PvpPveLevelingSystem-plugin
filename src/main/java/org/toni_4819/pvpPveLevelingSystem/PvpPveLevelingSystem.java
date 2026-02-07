@@ -12,6 +12,8 @@ import org.toni_4819.pvpPveLevelingSystem.managers.CommandManager;
 import org.toni_4819.pvpPveLevelingSystem.managers.LangManager;
 import org.toni_4819.pvpPveLevelingSystem.managers.StorageManager;
 
+import java.util.Objects;
+
 public class PvpPveLevelingSystem extends JavaPlugin {
 
     private XPManager xpManager;
@@ -33,6 +35,12 @@ public class PvpPveLevelingSystem extends JavaPlugin {
         storageManager = new StorageManager(this);
         storageManager.connect();
 
+        // tab completion
+        CommandManager commandManager = new CommandManager(this, xpManager);
+        Objects.requireNonNull(getCommand("leveling")).setExecutor(commandManager);
+        Objects.requireNonNull(getCommand("leveling")).setTabCompleter(commandManager);
+
+
         // Detect LuckPerms
         if (getServer().getPluginManager().getPlugin("LuckPerms") != null) {
             RegisteredServiceProvider<LuckPerms> provider =
@@ -52,11 +60,11 @@ public class PvpPveLevelingSystem extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new XPListener(this, xpManager, rewardsManager), this);
 
         // Register commands
-        getCommand("leveling").setExecutor(new CommandManager(this, xpManager));
+        Objects.requireNonNull(getCommand("leveling")).setExecutor(new CommandManager(this, xpManager));
 
         // Register PlaceholderAPI expansion
         if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            new LevelingExpansion(this, xpManager).register();
+            new LevelingExpansion(xpManager).register();
         }
 
         getLogger().info("PvpPveLevelingSystem enabled!");
@@ -65,9 +73,7 @@ public class PvpPveLevelingSystem extends JavaPlugin {
     @Override
     public void onDisable() {
         // Save all online players before shutdown
-        getServer().getOnlinePlayers().forEach(player -> {
-            xpManager.savePlayer(player);
-        });
+        getServer().getOnlinePlayers().forEach(player -> xpManager.savePlayer(player));
 
         if (storageManager != null) {
             storageManager.close();
