@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'org.toni_4819'
-version = '1.1'
+version = '1.1.1'
 
 repositories {
     mavenCentral()
