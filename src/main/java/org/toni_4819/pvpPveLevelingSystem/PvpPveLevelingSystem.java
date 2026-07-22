@@ -31,6 +31,16 @@ public class PvpPveLevelingSystem extends JavaPlugin {
         // Load language system
         langManager = new LangManager(this);
 
+        // Load config
+        private boolean debug;
+
+        @Override
+        public void onEnable() {
+            saveDefaultConfig();
+            debug = getConfig().getBoolean("debug", false);
+        }
+
+
         // Initialize storage
         storageManager = new StorageManager(this);
         storageManager.connect();

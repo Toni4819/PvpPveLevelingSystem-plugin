@@ -51,6 +51,7 @@ public class StorageManager {
 
     public void close() {
         // Nothing to close here because connections are opened per query
-        plugin.getLogger().info("Storage manager closed.");
+            plugin.getLogger().info("Storage manager closed.");
+
     }
 }

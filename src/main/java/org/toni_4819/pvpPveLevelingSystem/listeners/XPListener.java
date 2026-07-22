@@ -33,13 +33,18 @@ public class XPListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         plugin.getXpManager().loadPlayer(player);
-        plugin.getLogger().info("Loaded data for player: " + player.getName());
+        if (debug) {
+            plugin.getLogger().info("Loaded data for player: " + player.getName());
+        }
     }
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         plugin.getXpManager().savePlayer(player);
-        plugin.getLogger().info("Saved data for player on quit: " + player.getName());
+        if (debug) {
+            plugin.getLogger().info("Saved data for player on quit: " + player.getName());
+        }
+
     }
 
 }

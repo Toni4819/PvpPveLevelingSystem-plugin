@@ -6,6 +6,9 @@
 # You can create others languages in /lang/<name>.yml.
 lang: en_us
 
+# View debug logs
+debug: true
+
 storage:
   provider: sql # sql, mysql
 

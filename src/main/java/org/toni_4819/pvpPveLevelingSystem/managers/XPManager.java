@@ -166,8 +166,13 @@ public class XPManager {
             ps.setInt(3, getLevel(player));
             ps.executeUpdate();
 
-            plugin.getLogger().info("Player data saved: " + player.getName() +
-                    " (XP=" + getXP(player) + ", Level=" + getLevel(player) + ")");
+            if (debug) {
+                plugin.getLogger().info(
+                        "Player data saved: " + player.getName() +
+                                " (XP=" + getXP(player) + ", Level=" + getLevel(player) + ")"
+                );
+            }
+
         } catch (SQLException e) {
             plugin.getLogger().log(Level.SEVERE, "Failed to save player data for " + player.getName(), e);
         }
