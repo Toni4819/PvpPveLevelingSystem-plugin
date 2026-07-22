@@ -8,7 +8,6 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import fr.toni_4819.pvpPveLevelingSystem.PvpPveLevelingSystem;
-import fr.toni_4819.pvpPveLevelingSystem.managers.RewardsManager;
 import fr.toni_4819.pvpPveLevelingSystem.managers.XPManager;
 
 public class XPListener implements Listener {
@@ -16,7 +15,7 @@ public class XPListener implements Listener {
     private final PvpPveLevelingSystem plugin;
     private final XPManager xpManager;
 
-    public XPListener(PvpPveLevelingSystem plugin, XPManager xpManager, RewardsManager rewardsManager) {
+    public XPListener(PvpPveLevelingSystem plugin, XPManager xpManager) {
         this.plugin = plugin;
         this.xpManager = xpManager;
     }

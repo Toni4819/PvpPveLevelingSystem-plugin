@@ -15,9 +15,8 @@ public class RewardsManager {
         this.plugin = plugin;
     }
 
-    /**
-     * Executes rewards for a given level if defined in config.
-     */
+
+    // Executes rewards for a given level if defined in config.
     public void giveRewards(Player player, int level) {
         if (!plugin.getConfig().isConfigurationSection("rewards.levels")) return;
 

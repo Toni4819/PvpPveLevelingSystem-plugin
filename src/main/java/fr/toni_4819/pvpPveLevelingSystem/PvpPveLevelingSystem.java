@@ -32,8 +32,8 @@ public class PvpPveLevelingSystem extends JavaPlugin {
         saveDefaultConfig();
         debug = getConfig().getBoolean("debug", false);
 
-        int pluginId = 29210;
-        Metrics metrics = new Metrics(this, pluginId);
+        // Metrics
+        new Metrics(this, 29210);
 
         // Load language system
         langManager = new LangManager(this);
@@ -64,7 +64,7 @@ public class PvpPveLevelingSystem extends JavaPlugin {
         rewardsManager = new RewardsManager(this);
 
         // Register listeners
-        getServer().getPluginManager().registerEvents(new XPListener(this, xpManager, rewardsManager), this);
+        getServer().getPluginManager().registerEvents(new XPListener(this, xpManager), this);
 
         // Register commands
         Objects.requireNonNull(getCommand("leveling")).setExecutor(new CommandManager(this, xpManager));

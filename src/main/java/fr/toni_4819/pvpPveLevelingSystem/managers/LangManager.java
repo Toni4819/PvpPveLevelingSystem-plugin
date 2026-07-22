@@ -43,19 +43,19 @@ public class LangManager {
 
         String full = prefix + msg;
 
-        // Remplacer les placeholders (%command%, %player%, %level%, etc.)
+        // Parse placeholders (%command%, %player%, %level%, etc.)
         if (placeholders != null) {
             for (Map.Entry<String, String> entry : placeholders.entrySet()) {
                 full = full.replace(entry.getKey(), entry.getValue());
             }
         }
 
-        // MiniMessage si tags présents
+        // MiniMessage if tags present
         if (full.contains("<")) {
             return miniMessage.deserialize(full);
         }
 
-        // Sinon legacy (&)
+        // Else legacy (&)
         return legacy.deserialize(full);
     }
 }
