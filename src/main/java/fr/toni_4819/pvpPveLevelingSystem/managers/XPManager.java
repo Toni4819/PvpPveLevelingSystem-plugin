@@ -1,9 +1,9 @@
-package org.toni_4819.pvpPveLevelingSystem.managers;
+package fr.toni_4819.pvpPveLevelingSystem.managers;
 
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.model.user.User;
 import org.bukkit.entity.Player;
-import org.toni_4819.pvpPveLevelingSystem.PvpPveLevelingSystem;
+import fr.toni_4819.pvpPveLevelingSystem.PvpPveLevelingSystem;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -166,7 +166,7 @@ public class XPManager {
             ps.setInt(3, getLevel(player));
             ps.executeUpdate();
 
-            if (debug) {
+            if (plugin.isDebug()) {
                 plugin.getLogger().info(
                         "Player data saved: " + player.getName() +
                                 " (XP=" + getXP(player) + ", Level=" + getLevel(player) + ")"

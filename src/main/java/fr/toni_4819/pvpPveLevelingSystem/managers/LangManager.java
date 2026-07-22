@@ -1,11 +1,11 @@
-package org.toni_4819.pvpPveLevelingSystem.managers;
+package fr.toni_4819.pvpPveLevelingSystem.managers;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.toni_4819.pvpPveLevelingSystem.PvpPveLevelingSystem;
+import fr.toni_4819.pvpPveLevelingSystem.PvpPveLevelingSystem;
 
 import java.io.File;
 import java.util.Map;

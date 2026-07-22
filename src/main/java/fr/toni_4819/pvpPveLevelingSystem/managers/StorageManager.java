@@ -1,6 +1,6 @@
-package org.toni_4819.pvpPveLevelingSystem.managers;
+package fr.toni_4819.pvpPveLevelingSystem.managers;
 
-import org.toni_4819.pvpPveLevelingSystem.PvpPveLevelingSystem;
+import fr.toni_4819.pvpPveLevelingSystem.PvpPveLevelingSystem;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,16 +1,16 @@
-package org.toni_4819.pvpPveLevelingSystem;
+package fr.toni_4819.pvpPveLevelingSystem;
 
 import net.luckperms.api.LuckPerms;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.toni_4819.pvpPveLevelingSystem.listeners.XPListener;
-import org.toni_4819.pvpPveLevelingSystem.managers.RewardsManager;
-import org.toni_4819.pvpPveLevelingSystem.managers.XPManager;
-import org.toni_4819.pvpPveLevelingSystem.placeholders.LevelingExpansion;
-import org.toni_4819.pvpPveLevelingSystem.managers.CommandManager;
-import org.toni_4819.pvpPveLevelingSystem.managers.LangManager;
-import org.toni_4819.pvpPveLevelingSystem.managers.StorageManager;
+import fr.toni_4819.pvpPveLevelingSystem.listeners.XPListener;
+import fr.toni_4819.pvpPveLevelingSystem.managers.RewardsManager;
+import fr.toni_4819.pvpPveLevelingSystem.managers.XPManager;
+import fr.toni_4819.pvpPveLevelingSystem.placeholders.LevelingExpansion;
+import fr.toni_4819.pvpPveLevelingSystem.managers.CommandManager;
+import fr.toni_4819.pvpPveLevelingSystem.managers.LangManager;
+import fr.toni_4819.pvpPveLevelingSystem.managers.StorageManager;
 
 import java.util.Objects;
 
@@ -21,25 +21,22 @@ public class PvpPveLevelingSystem extends JavaPlugin {
     private LuckPerms luckPerms;
     private LangManager langManager;
     private StorageManager storageManager;
+    private boolean debug;
+    public boolean isDebug() {
+        return debug;
+    }
+
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
+        debug = getConfig().getBoolean("debug", false);
+
         int pluginId = 29210;
         Metrics metrics = new Metrics(this, pluginId);
 
         // Load language system
         langManager = new LangManager(this);
-
-        // Load config
-        private boolean debug;
-
-        @Override
-        public void onEnable() {
-            saveDefaultConfig();
-            debug = getConfig().getBoolean("debug", false);
-        }
-
 
         // Initialize storage
         storageManager = new StorageManager(this);
@@ -74,7 +71,7 @@ public class PvpPveLevelingSystem extends JavaPlugin {
 
         // Register PlaceholderAPI expansion
         if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            new LevelingExpansion(xpManager).register();
+            new LevelingExpansion(this, xpManager).register();
         }
 
         getLogger().info("PvpPveLevelingSystem enabled!");

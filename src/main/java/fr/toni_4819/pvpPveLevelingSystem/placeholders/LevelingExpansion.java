@@ -1,15 +1,18 @@
-package org.toni_4819.pvpPveLevelingSystem.placeholders;
+package fr.toni_4819.pvpPveLevelingSystem.placeholders;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.jspecify.annotations.NonNull;
-import org.toni_4819.pvpPveLevelingSystem.managers.XPManager;
+import fr.toni_4819.pvpPveLevelingSystem.PvpPveLevelingSystem;
+import fr.toni_4819.pvpPveLevelingSystem.managers.XPManager;
 
 public class LevelingExpansion extends PlaceholderExpansion {
 
+    private final PvpPveLevelingSystem plugin;
     private final XPManager xpManager;
 
-    public LevelingExpansion(XPManager xpManager) {
+    public LevelingExpansion(PvpPveLevelingSystem plugin, XPManager xpManager) {
+        this.plugin = plugin;
         this.xpManager = xpManager;
     }
 
@@ -25,7 +28,7 @@ public class LevelingExpansion extends PlaceholderExpansion {
 
     @Override
     public @NonNull String getVersion() {
-        return plugin.getDescription().getVersion();
+        return plugin.getPluginMeta().getVersion();
     }
 
     @Override

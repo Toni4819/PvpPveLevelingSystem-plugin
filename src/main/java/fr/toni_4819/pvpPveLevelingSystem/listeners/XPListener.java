@@ -1,4 +1,4 @@
-package org.toni_4819.pvpPveLevelingSystem.listeners;
+package fr.toni_4819.pvpPveLevelingSystem.listeners;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -7,9 +7,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.toni_4819.pvpPveLevelingSystem.PvpPveLevelingSystem;
-import org.toni_4819.pvpPveLevelingSystem.managers.RewardsManager;
-import org.toni_4819.pvpPveLevelingSystem.managers.XPManager;
+import fr.toni_4819.pvpPveLevelingSystem.PvpPveLevelingSystem;
+import fr.toni_4819.pvpPveLevelingSystem.managers.RewardsManager;
+import fr.toni_4819.pvpPveLevelingSystem.managers.XPManager;
 
 public class XPListener implements Listener {
 
@@ -33,7 +33,7 @@ public class XPListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         plugin.getXpManager().loadPlayer(player);
-        if (debug) {
+        if (plugin.isDebug()) {
             plugin.getLogger().info("Loaded data for player: " + player.getName());
         }
     }
@@ -41,7 +41,7 @@ public class XPListener implements Listener {
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         plugin.getXpManager().savePlayer(player);
-        if (debug) {
+        if (plugin.isDebug()) {
             plugin.getLogger().info("Saved data for player on quit: " + player.getName());
         }
 

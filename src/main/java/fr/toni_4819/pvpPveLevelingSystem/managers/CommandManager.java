@@ -1,4 +1,4 @@
-package org.toni_4819.pvpPveLevelingSystem.managers;
+package fr.toni_4819.pvpPveLevelingSystem.managers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.jspecify.annotations.NonNull;
-import org.toni_4819.pvpPveLevelingSystem.PvpPveLevelingSystem;
+import fr.toni_4819.pvpPveLevelingSystem.PvpPveLevelingSystem;
 
 import java.util.ArrayList;
 import java.util.List;

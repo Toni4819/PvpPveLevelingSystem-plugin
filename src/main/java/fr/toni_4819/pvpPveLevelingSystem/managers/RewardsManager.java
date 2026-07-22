@@ -1,8 +1,8 @@
-package org.toni_4819.pvpPveLevelingSystem.managers;
+package fr.toni_4819.pvpPveLevelingSystem.managers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.toni_4819.pvpPveLevelingSystem.PvpPveLevelingSystem;
+import fr.toni_4819.pvpPveLevelingSystem.PvpPveLevelingSystem;
 
 import java.util.List;
 import java.util.Map;
