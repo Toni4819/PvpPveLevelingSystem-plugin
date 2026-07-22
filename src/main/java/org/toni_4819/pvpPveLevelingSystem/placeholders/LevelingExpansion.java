@@ -25,7 +25,7 @@ public class LevelingExpansion extends PlaceholderExpansion {
 
     @Override
     public @NonNull String getVersion() {
-        return "1.0.0";
+        return plugin.getDescription().getVersion();
     }
 
     @Override
