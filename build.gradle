@@ -4,8 +4,8 @@ plugins {
     id("com.gradleup.shadow") version "9.4.3"
 }
 
-group = 'org.toni_4819'
-version = '1.1.2'
+group = 'fr.toni_4819'
+version = '1.2'
 
 repositories {
     mavenCentral()

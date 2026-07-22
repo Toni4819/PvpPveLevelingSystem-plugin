@@ -1,6 +1,6 @@
 name: PvpPveLevelingSystem
 version: ${version}
-main: org.toni_4819.pvpPveLevelingSystem.PvpPveLevelingSystem
+main: fr.toni_4819.pvpPveLevelingSystem.PvpPveLevelingSystem
 api-version: '1.21'
 depend: [PlaceholderAPI]
 soft-depend: [LuckPerms]
