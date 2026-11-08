@@ -16,4 +16,5 @@ messages:
   level-removed: "&aRetiré %amount% niveaux à %player%."
   level-set: "&aNiveau de %player% défini à %amount%."
   level-up: "&aNiveau supérieur ! Vous êtes maintenant niveau %level%."
+  players-only: "&cSeuls les joueurs peuvent utiliser cette commande."
   reward: "&6Vous avez reçu des récompenses pour avoir atteint le niveau %level% !"

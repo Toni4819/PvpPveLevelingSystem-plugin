@@ -16,4 +16,5 @@ messages:
   level-removed: "&aRemoved %amount% levels from %player%."
   level-set: "&aSet %player%'s level to %amount%."
   level-up: "&aLevel up! You are now level %level%."
+  players-only: "&cOnly players can use this command."
   reward: "&6You received rewards for reaching level %level%!"

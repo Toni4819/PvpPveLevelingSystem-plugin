@@ -1,0 +1,118 @@
+# ==============================
+# Levels GUI (/levels)
+# ==============================
+# Every text supports legacy colors (&6) or MiniMessage (<gold>), and PlaceholderAPI placeholders.
+#
+# Placeholders for every item and the title:
+#   %player%         -> viewer name
+#   %current_level%  -> viewer level
+#   %current_xp%     -> viewer XP in the current level
+#   %next_level_xp%  -> XP needed to go from the current level to the next one
+#   %remaining_xp%   -> XP left before the next level
+#   %percent%        -> progress to the next level, in percent
+#   %bar%            -> XP bar (see "bar" in config.yml)
+#   %page% / %pages% -> current page / number of pages
+#
+# Extra placeholders for level items:
+#   %level%          -> level shown by the item
+#   %xp_remaining%   -> XP still needed to reach that level (0 when reached)
+#   %xp_required%    -> XP needed to go from the previous level to that level
+#   %rewards%        -> replaced by one line per entry of "rewards.levels.<level>.display" in config.yml
+#                       (the text around %rewards% is kept on every line, e.g. " &8• %rewards%")
+#                       If the level has no display lines, "no-rewards" is used.
+
+title: "&8Levels &7(%page%/%pages%)"
+# 1 to 6
+rows: 6
+
+# Levels shown in the menu.
+first-level: 1
+max-level: 100
+
+# Slots used for level items, page by page. Numbers or ranges ("10-16").
+level-slots:
+  - "10-16"
+  - "19-25"
+  - "28-34"
+  - "37-43"
+
+# If true, the item amount equals the level (max 64).
+level-as-amount: false
+
+no-rewards: "&7None"
+
+# Items fill empty slots. Set enabled: false to disable.
+filler:
+  enabled: true
+  material: GRAY_STAINED_GLASS_PANE
+  name: " "
+
+# Item states for each level.
+levels:
+  # Level already reached.
+  unlocked:
+    material: LIME_DYE
+    glow: false
+    name: "&aLevel %level% &2✔"
+    lore:
+      - "&7Reached!"
+      - ""
+      - "&6Rewards:"
+      - " &8• %rewards%"
+  # Next level to reach.
+  next:
+    material: EXPERIENCE_BOTTLE
+    glow: true
+    name: "&eLevel %level% &6➜"
+    lore:
+      - "&7XP remaining: &e%xp_remaining%"
+      - "&7Progress: %bar% &7(%percent%%)"
+      - ""
+      - "&6Rewards:"
+      - " &8• %rewards%"
+  # Levels further away.
+  locked:
+    material: GRAY_DYE
+    glow: false
+    name: "&cLevel %level% &4✖"
+    lore:
+      - "&7XP remaining: &c%xp_remaining%"
+      - ""
+      - "&6Rewards:"
+      - " &8• %rewards%"
+
+# Overrides for specific levels, applied on top of the state item above.
+# Any key of a state item can be overridden (material, glow, name, lore).
+level-overrides:
+  10:
+    material: DIAMOND
+  50:
+    material: NETHER_STAR
+    glow: true
+
+# Buttons. Remove a section to hide it. A PLAYER_HEAD shows the viewer's head.
+buttons:
+  info:
+    slot: 4
+    material: PLAYER_HEAD
+    name: "&6%player%"
+    lore:
+      - "&7Level: &e%current_level%"
+      - "&7XP: &e%current_xp%&7/&e%next_level_xp%"
+      - "&7Progress: %bar% &7(%percent%%)"
+  previous-page:
+    slot: 45
+    material: ARROW
+    name: "&ePrevious page"
+    lore:
+      - "&7Page %page%/%pages%"
+  next-page:
+    slot: 53
+    material: ARROW
+    name: "&eNext page"
+    lore:
+      - "&7Page %page%/%pages%"
+  close:
+    slot: 49
+    material: BARRIER
+    name: "&cClose"

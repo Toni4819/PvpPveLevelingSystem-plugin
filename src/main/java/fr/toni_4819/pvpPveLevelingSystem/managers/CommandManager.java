@@ -40,6 +40,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
             case "reload":
                 plugin.reloadConfig();
                 plugin.getLangManager().loadLang();
+                plugin.getGuiManager().reload();
                 sender.sendMessage(plugin.getLangManager().getMessage("reload"));
                 break;
             default:

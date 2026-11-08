@@ -62,14 +62,22 @@ generic-level-command: []
 rewards:
   # Rewards given when reaching specific levels.
   # Commands are executed by the console.
+  # "display" lines are shown in the /levels menu (see %rewards% in gui.yml).
   levels:
     1:
       commands:
         - "give %player% diamond 1"
+      display:
+        - "&b1x Diamond"
     5:
       commands:
         - "eco give %player% 100"
+      display:
+        - "&a$100"
     10:
       commands:
         - "eco give %player% 100"
         - "give %player% diamond 1"
+      display:
+        - "&a$100"
+        - "&b1x Diamond"

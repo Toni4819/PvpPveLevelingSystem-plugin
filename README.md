@@ -18,6 +18,13 @@ Supports both **SQLite** and **MySQL** storage backends, integrates with **LuckP
 
 - `/leveling reload`
 - `/leveling <xp|level> <add|remove|set> <amount> <player>`
+- `/levels [page]` -> opens the levels menu (permission `pvppvelevelingsystem.gui`, default: everyone)
+
+## 🖼️ Levels GUI
+
+`/levels` opens a paginated menu with one item per level, showing the XP remaining to reach it and its rewards.
+Everything (title, rows, slots, materials, names, lore, buttons, per-level overrides) is configurable in `gui.yml`.
+Reward lines come from `rewards.levels.<level>.display` in `config.yml`. `/leveling reload` also reloads `gui.yml`.
 
 ---
 

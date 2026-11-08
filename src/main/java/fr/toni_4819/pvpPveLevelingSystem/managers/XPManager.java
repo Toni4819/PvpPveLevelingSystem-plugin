@@ -101,7 +101,20 @@ public class XPManager {
                 plugin.getConfig().getDouble("group-xp-multipliers.default", 1.0));
     }
 
-    private int getRequiredXP(int level) {
+    /** Total XP still needed to reach the given level (0 if already reached). */
+    public long getXPToReachLevel(Player player, int targetLevel) {
+        int currentLevel = getLevel(player);
+        if (targetLevel <= currentLevel) return 0;
+
+        long total = -getXP(player);
+        for (int level = currentLevel; level < targetLevel; level++) {
+            total += getRequiredXP(level);
+        }
+        return Math.max(0, total);
+    }
+
+    /** XP needed to go from the given level to the next one. */
+    public int getRequiredXP(int level) {
         boolean useMultiplier = plugin.getConfig().getBoolean("levels-xp.use-multiplier", true);
         if (useMultiplier) {
             int baseXP = plugin.getConfig().getInt("levels-xp.base-xp", 10);

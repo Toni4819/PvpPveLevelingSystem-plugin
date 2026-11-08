@@ -10,4 +10,16 @@ commands:
     usage: /<command> <subcommand>
     aliases: [pvppvelevelingsystem]
     permission: pvppvelevelingsystem.admin
+  levels:
+    description: Open the levels and rewards menu
+    usage: /<command> [page]
+    permission: pvppvelevelingsystem.gui
+
+permissions:
+  pvppvelevelingsystem.admin:
+    description: Access to /leveling
+    default: op
+  pvppvelevelingsystem.gui:
+    description: Access to /levels
+    default: true
 

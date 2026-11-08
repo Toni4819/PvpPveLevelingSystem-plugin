@@ -4,6 +4,9 @@ import net.luckperms.api.LuckPerms;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import fr.toni_4819.pvpPveLevelingSystem.gui.GuiListener;
+import fr.toni_4819.pvpPveLevelingSystem.gui.GuiManager;
+import fr.toni_4819.pvpPveLevelingSystem.gui.LevelsCommand;
 import fr.toni_4819.pvpPveLevelingSystem.listeners.XPListener;
 import fr.toni_4819.pvpPveLevelingSystem.managers.RewardsManager;
 import fr.toni_4819.pvpPveLevelingSystem.managers.XPManager;
@@ -21,6 +24,7 @@ public class PvpPveLevelingSystem extends JavaPlugin {
     private LuckPerms luckPerms;
     private LangManager langManager;
     private StorageManager storageManager;
+    private GuiManager guiManager;
     private boolean debug;
     public boolean isDebug() {
         return debug;
@@ -62,12 +66,15 @@ public class PvpPveLevelingSystem extends JavaPlugin {
 
         xpManager = new XPManager(this, luckPerms);
         rewardsManager = new RewardsManager(this);
+        guiManager = new GuiManager(this);
 
         // Register listeners
         getServer().getPluginManager().registerEvents(new XPListener(this, xpManager), this);
+        getServer().getPluginManager().registerEvents(new GuiListener(this), this);
 
         // Register commands
         Objects.requireNonNull(getCommand("leveling")).setExecutor(new CommandManager(this, xpManager));
+        Objects.requireNonNull(getCommand("levels")).setExecutor(new LevelsCommand(this));
 
         // Register PlaceholderAPI expansion
         if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
@@ -104,6 +111,10 @@ public class PvpPveLevelingSystem extends JavaPlugin {
 
     public LangManager getLangManager() {
         return langManager;
+    }
+
+    public GuiManager getGuiManager() {
+        return guiManager;
     }
 
     public StorageManager getStorageManager() {
